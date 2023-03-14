@@ -1,7 +1,8 @@
-package hcm.cloud.nacos.vo;
+package hcm.cloud.common.vo;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @Description 描述类
@@ -10,11 +11,13 @@ import lombok.experimental.FieldDefaults;
  */
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserVO {
+public class UserVO extends ResVO {
     String userName;
-    int age;
+    Integer age;
+    Integer id;
 }

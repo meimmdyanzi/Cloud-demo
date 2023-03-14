@@ -1,7 +1,8 @@
-package hcm.cloud.nacos.vo;
+package hcm.cloud.common.vo;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @Description 描述类
@@ -11,10 +12,11 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResVO {
     String resCode;
     String resMsg;
+    Integer port;
 }

@@ -4,23 +4,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableFeignClients
 public class NacosDemoApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(NacosDemoApplication.class, args);
-        System.out.println(applicationContext.getEnvironment().getProperty("userName"));
-        System.out.println(applicationContext.getEnvironment().getProperty("age"));
+        SpringApplication.run(NacosDemoApplication.class, args);
     }
 
     @Bean
     @LoadBalanced
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 

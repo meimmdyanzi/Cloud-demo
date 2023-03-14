@@ -1,9 +1,6 @@
 package hcm.cloud.nacos.service;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
-import hcm.cloud.nacos.vo.ResVO;
-import hcm.cloud.nacos.vo.UserVO;
+import hcm.cloud.common.vo.UserVO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +11,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestService {
-    @Value("${userName}")
+    @Value("${userName:abc}")
     private String userName;
-    @Value("${age}")
+    @Value("${age:10}")
     private int age;
 
-    @SentinelResource(value = "getUser", blockHandler = "blockException")
+//    @SentinelResource(value = "getUser", blockHandlerClass = ExceptionUtils.class, blockHandler = "blockException")
     public UserVO getUser() {
         return UserVO.builder().userName(userName).age(age).build();
     }
 
-    public ResVO blockException(BlockException e) {
-        return ResVO.builder().resCode("1001").resMsg("被限流了").build();
-    }
 }
