@@ -7,16 +7,41 @@ spring:
   cloud:
     nacos:
       discovery:
-        namespace: 00eec62c-3c40-4309-8541-466dd67aff5a
+        namespace: 51babe00-61c6-4cd9-93c9-223fe034ff08
         server-addr: 127.0.0.1
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
       routes:
         - id: user-demo
           uri: lb://user-demo
           predicates:
             - Path=/user/**    # 断言，路径相匹配的进行路由
           filters:
-            - AddRequestHeader=X-Request-name,red #添加请求头
+            - My=bac,111
+            - Pre=headerName,testse
+            - AddRequestHeader=X-Request-name,red22222 #添加请求头
+            - AddRequestParameter=firstName,huangchaoming0000000
       httpclient:
         connect-timeout: 5
-        response-timeout: 15
+        response-timeout: 15s
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: debug
+        http:
+          server:
+            reactive: debug
+        web:
+          reactive: debug
+    reactor:
+      netty: debug
+    redisratelimiter: debug
